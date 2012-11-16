@@ -38,7 +38,7 @@ function [f df] = find_parameters(params)
             covariance13 = cov(error1, error3);
             covariance23 = cov(error2, error3);
             
-            f = k1^2*var(error1) + k2^2*var(error2) + k3^2*var(error3) + 2*k1*k2*covariance12(1,2) + 2*k1*k3*covariance13(1,3) + 2*k2*k3*covariance23(1,2);
+            f = k1^2*var(error1) + k2^2*var(error2) + k3^2*var(error3) + 2*k1*k2*covariance12(1,2) + 2*k1*k3*covariance13(1,2) + 2*k2*k3*covariance23(1,2);
             
             derivative_k1 = 2*k1*var(error1) + 2*k2*covariance12(1,2) + 2*k3*covariance13(1,2) ;
             derivative_k2 = 2*k2*var(error2) + 2*k1*covariance12(1,2) + 2*k3*covariance23(1,2) ;

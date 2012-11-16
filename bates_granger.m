@@ -1,11 +1,12 @@
-file_path = '/home/lakesh/Aerosol_v2/all_final_qad_angles_cfrac.mat';
+file_path = '/Users/lakeshkansakar/aerosol_v2/all_final_qad_angles_cfrac.mat';
 load(file_path);
 
-number_sites = 20;
+number_sites = 50;
 number_satellites = 5;
 number_models = 31;
 
-locations = [2; 4; 6; 15; 20; 25; 50; 65; 80; 10; 11; 12; 13; 14; 15; 31; 35; 38; 71; 72];
+%locations = [2; 4; 6; 15; 20; 25; 50; 65; 80; 10; 11; 12; 13; 14; 15; 31; 35; 38; 71; 72];
+locations = (1:100)';
 years = [2005; 2006; 2007; 2008; 2009; 2010];
 
 variance = zeros(number_sites,1);
@@ -120,7 +121,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,1:4) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1),(0.00000001));
             
         case 2
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) <=0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -128,7 +129,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 2 3 5]) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1),(0.00000001));
             
         case 3
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) <=0 & measurements(:,4) > 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -136,7 +137,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,1:3) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 4
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -144,7 +145,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 2 4 5]) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1), (0.00000001));
             
         case 5
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -152,7 +153,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 2 4]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 6
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -160,7 +161,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 2 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 7
             index = find(measurements(:,1) <= 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -168,7 +169,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,1:2) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1 1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1 1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 8
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) <=0 & measurements(:,4) <=0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -176,7 +177,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 3 4 5]) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1),(0.00000001));
             
         case 9
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) <=0 & measurements(:,4) <=0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -184,7 +185,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 3 4]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 10
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) <= 0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -192,16 +193,15 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 3 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 11
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) <= 0 & measurements(:,4) > 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
             satellite_data = measurements(index,:);
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 3]) = [];
-
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1 1],[],[],[1,1 1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1 1],(1),[ 0.00000001 0.00000001 0.00000001]);
             
         case 12
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -209,7 +209,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 4 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 13
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -217,7 +217,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 4]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1, 1],[],[],[1,1 1],(1));
+            k = fmincon(@find_parameters,[1,1, 1],[],[],[1,1 1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 14
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -225,7 +225,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[1 5]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 15
             index = find(measurements(:,1) <= 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -233,7 +233,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,1) = [];
             number_parameters = 4;
-            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1),[0.00000001 0.00000001 0.00000001 0.00000001]);
             
         case 16
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) <=0 & measurements(:,4) <=0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -241,7 +241,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,2:5) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1),(0.00000001));
             
         case 17
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) <=0 & measurements(:,4) <= 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -249,7 +249,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,2:4) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 18
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) <=0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -257,7 +257,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[2 3 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 19
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) <= 0 & measurements(:,4) >0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -265,7 +265,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,2:3) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 20
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) <=0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -273,7 +273,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[2 4 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 21
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -281,7 +281,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[2 4]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 22
             index = find(measurements(:,1) > 0 & measurements(:,2) <=0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -289,7 +289,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[2 5]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));   
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);   
             
         case 23
             index = find(measurements(:,1) > 0 & measurements(:,2) <= 0 & measurements(:,3) >0 & measurements(:,4) >0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -297,7 +297,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,2) = [];
             number_parameters = 4;
-            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1),[0.00000001 0.00000001 0.00000001 0.00000001]);
             
         case 24
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) <=0 & measurements(:,4) <=0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -305,7 +305,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[3 4 5]) = [];
             number_parameters = 2;
-            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1));
+            k = fmincon(@find_parameters,[1,1],[],[],[1,1],(1),[0.00000001 0.00000001]);
             
         case 25
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) <=0 & measurements(:,4) <= 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -313,7 +313,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[3 4]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 26
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) <=0 & measurements(:,4) > 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -321,7 +321,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,[3 5]) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 27
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) <=  0 & measurements(:,4) >0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -329,7 +329,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,3) = [];
             number_parameters = 1;
-            k = fmincon(@find_parameters,(1),[],[],(1),(1));
+            k = fmincon(@find_parameters,(1),[],[],(1),(1),(0.00000001));
             
         case 28
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) <= 0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -337,7 +337,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,4:5) = [];
             number_parameters = 3;
-            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1],[],[],[1,1,1],(1),[0.00000001 0.00000001 0.00000001]);
             
         case 29
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) <=0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
@@ -345,7 +345,7 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,4) = [];
             number_parameters = 4;
-            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1),[0.00000001 0.00000001 0.00000001 0.00000001]);
             
         case 30
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) >0 & measurements(:,5) <= 0 & measurements_aeronet(:,1) > 0);
@@ -353,14 +353,14 @@ for i=1:number_models
             aeronet_data = measurements_aeronet(index,:);
             satellite_data(:,5) = [];
             number_parameters = 4;
-            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1,1],[],[],[1,1,1,1],(1),[0.00000001 0.00000001 0.00000001 0.00000001]);
             
         case 31
             index = find(measurements(:,1) > 0 & measurements(:,2) > 0 & measurements(:,3) > 0 & measurements(:,4) > 0 & measurements(:,5) > 0 & measurements_aeronet(:,1) > 0);
             satellite_data = measurements(index,:);
             aeronet_data = measurements_aeronet(index,:);
             number_parameters = 5;
-            k = fmincon(@find_parameters,[1,1,1,1,1],[],[],[1,1,1,1,1],(1));
+            k = fmincon(@find_parameters,[1,1,1,1,1],[],[],[1,1,1,1,1],(1),[0.00000001 0.00000001 0.00000001 0.00000001 0.00000001]);
             
         
             
